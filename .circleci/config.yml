@@ -41,6 +41,8 @@ jobs:
           name: Run Tests
           command: ./gradlew lint test
 
+  save_results:
+    steps:
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
           destination: reports
@@ -53,3 +55,6 @@ workflows:
   workflow:
     jobs:
       - test
+      - save_results:
+          requires:
+            - test
