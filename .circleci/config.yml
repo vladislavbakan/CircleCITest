@@ -47,6 +47,8 @@ jobs:
           command: ./gradlew lint test
 
   save_results:
+    <<: *android_config
+
     steps:
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
