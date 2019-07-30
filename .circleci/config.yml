@@ -86,6 +86,6 @@ workflows:
     jobs:
       - test
       - build:
-          #type: approval
+          type: approval
           requires:
             - test
