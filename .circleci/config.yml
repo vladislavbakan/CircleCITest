@@ -82,10 +82,10 @@ jobs:
 
 workflows:
   version: 2
-  workflow:
+  workflow1:
     jobs:
       - test
-      - build:
-          type: approval
-          requires:
-            - test
+
+  workflow2:
+    jobs:
+      - build
