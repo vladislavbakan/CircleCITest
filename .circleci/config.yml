@@ -60,7 +60,15 @@ jobs:
       - checkout
 
       - run:
-          name: Test shell script
+          name: Previous version
+          command: echo "Build version $BUILD_VERSION"
+
+      - run:
+          name: Change version
+          command: export BUILD_VERSION=$(($BUILD_VERSION+1))
+
+      - run:
+          name: New version
           command: echo "Build version $BUILD_VERSION"
 
   build:
