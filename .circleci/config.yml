@@ -61,7 +61,7 @@ jobs:
 
       - run:
           name: Test shell script
-          command: echo "Test echo"
+          command: echo "Build version $BUILD_VERSION"
 
   build:
     <<: *android_config
