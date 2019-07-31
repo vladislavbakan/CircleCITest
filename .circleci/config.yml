@@ -53,6 +53,16 @@ jobs:
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
 
+  fast_test:
+    <<: *android_config
+
+    steps:
+      - checkout
+
+      - run:
+          name: Test shell script
+          command: echo "Test echo"
+
   build:
     <<: *android_config
 
@@ -84,11 +94,11 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - test
+      - fast_test
       - build:
           requires:
-            - test
+            - fast_test
           filters:
             branches:
               only:
-                - /version-*/
+                - /version-.*/
