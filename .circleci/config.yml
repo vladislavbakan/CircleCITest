@@ -56,10 +56,6 @@ jobs:
   build:
     <<: *android_config
 
-    branches:
-      only:
-        - /version-*/
-
     steps:
       - checkout
 
@@ -92,3 +88,7 @@ workflows:
       - build:
           requires:
             - test
+          filters:
+            branches:
+              only:
+                - /version-*/
