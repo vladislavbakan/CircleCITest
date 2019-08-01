@@ -102,6 +102,18 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
+      - restore_cache:
+          key: version-codes
+
+      - run:
+          name: Up version code
+          command: ./gradlew upVersionCode
+
+      - save_cache:
+          key: version-codes
+          paths:
+            - version_codes.properties
+
       - run:
           name: Build
           command: ./gradlew assembleDebug
@@ -114,10 +126,10 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - fast_test
+      - test
       - build:
           requires:
-            - fast_test
+            - test
           filters:
             branches:
               only:
