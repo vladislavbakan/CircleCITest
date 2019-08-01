@@ -2,8 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def VERSION_CODE = 10
-def VERSION_NAME = "1.0.2"
+final VERSION_CODES_FILE = 'version_codes.properties'
+final VERSION_CODE = 10
+final VERSION_NAME = '1.0.2'
 
 android {
     compileSdkVersion 29
@@ -39,12 +40,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        outputFileName = "TestApp_${buildType.name}_v.${versionName}(${versionCode}).apk"
+    }
+}
+
 tasks.register("upVersionCode") {
     description = 'Increment versionCode for current versionName and save to versions.config'
 
     doLast {
         // open props file
-        def propsFile = new File('version_codes.properties')
+        def propsFile = new File(VERSION_CODES_FILE)
         propsFile.createNewFile()
 
         // read properties
