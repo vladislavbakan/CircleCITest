@@ -89,38 +89,22 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - restore_cache:
           key: version-codes
 
-      - run:
-          name: Build
-          command: ./gradlew assembleDebug
 
       - run:
           name: Up version code
           command: ./gradlew upVersionCode
 
       - save_cache:
-          key: version-codes
           paths:
             - version_codes.properties
+          key: version-codes
 
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/outputs/apk/debug
-          destination: apk
+
 
 workflows:
   version: 2
@@ -128,8 +112,8 @@ workflows:
     jobs:
       #- test
       - build:
-       #   requires:
-       #     - test
+        #  requires:
+        #    - test
           filters:
             branches:
               only:
