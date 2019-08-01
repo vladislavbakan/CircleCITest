@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+def VERSION_CODE = 3
+def VERSION_NAME = "1.0.1"
 
 android {
     compileSdkVersion 29
@@ -11,8 +12,8 @@ android {
         applicationId "com.bakan.circlecitest"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -32,8 +33,36 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     testImplementation 'junit:junit:4.12'
-    
+
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+tasks.register("upVersionCode") {
+    description = 'Increment versionCode for current versionName and save to versions.config'
+
+    doLast {
+        // open props file
+        def propsFile = new File('version_codes.properties')
+        propsFile.createNewFile()
+
+        // read properties
+        def props = new Properties()
+        props.load(propsFile.newReader())
+
+        // read current version code
+        def version = "version-$VERSION_NAME"
+        println("Version: $version")
+        def code = props[version] ?: VERSION_CODE
+        println("Current code: $code")
+
+        // increase version code
+        code = code.toInteger() + 1
+        props[version] = code.toString()
+        println("Next code: $code")
+
+        // save properties
+        props.store(propsFile.newWriter(), null)
+    }
 }

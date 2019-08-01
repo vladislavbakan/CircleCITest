@@ -91,6 +91,10 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - run:
+          name: Up version code
+          command: ./gradlew upVersionCode
+
+      - run:
           name: Build
           command: ./gradlew assembleDebug
 
