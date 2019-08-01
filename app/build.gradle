@@ -84,7 +84,7 @@ tasks.register("upVersionCode") {
         println("Current code: $code")
 
         // increase version code
-        code = code + 1
+        ++code
         props[version] = code.toString()
         println("Next code: $code")
 
