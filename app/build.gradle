@@ -57,7 +57,7 @@ def computeVersionCode() {
 
     // read current version code
     def version = "version-${project.VERSION_NAME}"
-    return (props[version]).toInteger() ?: project.VERSION_CODE
+    return (props[version] ?: project.VERSION_CODE).toInteger()
 }
 
 static def getVersionCodesFile() {
@@ -80,11 +80,11 @@ tasks.register("upVersionCode") {
         // read current version code
         def version = "version-$VERSION_NAME"
         println("Version: $version")
-        def code = props[version] ?: VERSION_CODE
+        def code = (props[version] ?: VERSION_CODE).toInteger()
         println("Current code: $code")
 
         // increase version code
-        code = code.toInteger() + 1
+        code = code + 1
         props[version] = code.toString()
         println("Next code: $code")
 
