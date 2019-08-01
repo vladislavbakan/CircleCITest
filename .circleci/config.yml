@@ -102,6 +102,14 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
+      - run:
+          name: Build
+          command: ./gradlew assembleDebug
+
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/outputs/apk/debug
+          destination: apk
+
       - restore_cache:
           key: version-codes
 
@@ -113,14 +121,6 @@ jobs:
           key: version-codes
           paths:
             - version_codes.properties
-
-      - run:
-          name: Build
-          command: ./gradlew assembleDebug
-
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/outputs/apk/debug
-          destination: apk
 
 workflows:
   version: 2
