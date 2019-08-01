@@ -38,9 +38,9 @@ jobs:
           command: ./gradlew androidDependencies
 
       - save_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - run:
           name: Run Lint
@@ -59,17 +59,17 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Previous version
-          command: echo "Text var $TEST_VAR"
+      - restore_cache:
+          key: version-codes
 
       - run:
-          name: Change version
-          command: echo 'export TEST_VAR=test' >> $BASH_ENV
+          name: Up version code
+          command: ./gradlew upVersionCode
 
-      - run:
-          name: New version
-          command: echo "Text var $TEST_VAR"
+      - save_cache:
+          key: version-codes
+          paths:
+            - version_codes.properties
 
   build:
     <<: *android_config
@@ -89,10 +89,6 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-
-      - run:
-          name: Up version code
-          command: ./gradlew upVersionCode
 
       - run:
           name: Build

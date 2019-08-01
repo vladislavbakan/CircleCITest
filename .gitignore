@@ -11,4 +11,4 @@
 /build
 /captures
 .externalNativeBuild
-versions.properties
+version_codes.properties
