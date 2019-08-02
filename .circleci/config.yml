@@ -105,9 +105,9 @@ jobs:
       - restore_cache:
           key: version-codes
 
-      - run:
-          name: Build
-          command: ./gradlew assembleDebug
+      #- run:
+      #    name: Build
+      #    command: ./gradlew assembleDebug
 
       - run:
           name: Up version code
@@ -118,18 +118,18 @@ jobs:
             - version_codes.properties
           key: version-codes
 
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/outputs/apk/debug
-          destination: apk
+      #- store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      #    path: app/build/outputs/apk/debug
+      #    destination: apk
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - test
+#      - test
       - build:
-          requires:
-            - test
+#          requires:
+#            - test
           filters:
             branches:
               only:
