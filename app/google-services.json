@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "589426905826",
+    "firebase_url": "https://circlecitest-a3ac7.firebaseio.com",
+    "project_id": "circlecitest-a3ac7",
+    "storage_bucket": "circlecitest-a3ac7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589426905826:android:cf5c32be3000435d9f04bb",
+        "android_client_info": {
+          "package_name": "com.bakan.circlecitest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589426905826-amohl6kb1hq7h1htvdkhqq3oqob987nu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bakan.circlecitest",
+            "certificate_hash": "6f16c350353d7a002ee1ab93f849549c8fa80c62"
+          }
+        },
+        {
+          "client_id": "589426905826-13lpttfamfem875l914qds6nmdrdk6ga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWACqr-GFBr_6rl_BnHmcRbljH3QR9zco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589426905826-13lpttfamfem875l914qds6nmdrdk6ga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
